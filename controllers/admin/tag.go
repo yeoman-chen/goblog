@@ -54,11 +54,11 @@ func (this *TagController) batch() {
 			idarr = append(idarr, id)
 		}
 	}
-	var tag models.Tag
+	//var tag models.Tag
 	switch op {
 	case "upcount": //更新统计
 		for _, id := range idarr {
-			tag := models.Tag{Id, id}
+			tag := models.Tag{Id: id}
 			if tag.Read() == nil {
 				tag.UpCount()
 			}
@@ -82,8 +82,8 @@ func (this *TagController) batch() {
 			tag.UpCount()
 		}
 	case "delete": //删除
-		for id, _ := range idarr {
-			tag := models.Tag{Id, id}
+		for _, id := range idarr {
+			tag := models.Tag{Id: id}
 			if tag.Read() == nil {
 				tag.Delete()
 			}
